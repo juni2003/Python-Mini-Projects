@@ -1,4 +1,6 @@
 import random  
+from colorama import init, Fore , Style
+init()  
 rand1 = random.randint(0, 10)
 
 print("\n\n>>Let's play high low game\n >>Rules: Numbers are choosen randomly and you have to guess weather next number is higher or lower. Range(0 to 10)")
@@ -20,8 +22,8 @@ while True:
 
         if rand2>rand1:
             if Guess.upper()=="H":
-                print("\033[1mCorrect!\033[0m Welldone!\n") #\033[1m is the ANSI escape code for starting bold text.
-                                                                    #033[0m is the ANSI escape code for resetting text formatting to default.
+                print(Fore.GREEN + Style.BRIGHT +" Correct! Welldone!\n"+ Style.RESET_ALL) 
+                                                                    
                 score =int(score+10)
                 rand1=rand2
             else:
@@ -31,7 +33,7 @@ while True:
                 quit()
         elif rand2<rand1:
             if Guess.upper()=="L":
-                print("#\033[1m Correct!\033[0m Welldone!\n")
+                print(Fore.GREEN + Style.BRIGHT +" Correct! Welldone!\n"+ Style.RESET_ALL)
                 score =int(score+10)
                 rand1=rand2
             else:
@@ -54,6 +56,6 @@ while True:
             print("Invalid input! Please input H ,L or Q. Exiting...")
             print("Your Final Score :",score)
             quit()
-       
+    input("Press Enter to exit...")       #Waits for user input before closing cmd window
         
 
