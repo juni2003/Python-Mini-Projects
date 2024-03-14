@@ -2,7 +2,7 @@ import time
 
 name = input("Enter your name: ")
 print("Welcome,",name," Your journey starts now...")
-time.sleep(3)
+time.sleep(4)
 print("You find yourself standing in the middle of a desolate road enveloped by darkness...")
 time.sleep(5) 
 answer = input("You're faced with two paths ahead.\nWill you venture left or right? (left/right) ").lower()
@@ -64,7 +64,7 @@ elif answer == "right":
             
             if answer == "hide":
                 print("You attempt to conceal yourself, but your efforts are futile against the prehistoric predator that discovers your presence...")
-                time.sleep(5) 
+                time.sleep(6) 
                 print("In the jaws of the dinosaur, your journey comes to a tragic end.")
             elif answer == "flee":
                 print("You run with all your might, but the thunderous footsteps behind you only grow louder...")
