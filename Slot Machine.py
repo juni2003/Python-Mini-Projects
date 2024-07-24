@@ -41,21 +41,15 @@ def check_winnings(coloumns , lines, bet, values):
     return winnings , winning_lines
 
 def get_slot_machine_spin(rows , cols , symbols):
-    all_symbols = []
-    for symbol, symbol_count in symbols.items():   #items function gives keys and values from dictonary
-        for _ in range(symbol_count):
-            all_symbols.append(symbol)
+    all_symbols = []   
+    for symbol, count in symbols.items():   #items function gives keys and values from dictonary
+        all_symbols.extend([symbol] * count)         #count has value of each key like for "A" * 2 it extend "A","A"
+        #append function single element to the list and extend adds each element to list
 
-    columns = []   #This is nested list for coloumns not rows
-    for _ in range(cols):
-        column = []
-        current_symbols = all_symbols[:]  #: is slice operator if we donot use it is will take all_symbols as refrence not as copy
-        for _ in range(rows):
-            value = random.choice(current_symbols)
-            current_symbols.remove(value)
-            column.append(value)
-        
-        columns.append(column)
+    columns = []    
+    for _ in range(cols):                    
+        column = random.sample(all_symbols, rows)        #for each coloumn sample() chooses each element randomly rows times like coloumn = ["A" , "B" , "B"]
+        columns.append(column)                            #sample function ensures that it doesnt select same value
 
     return columns
 
@@ -123,11 +117,19 @@ def get_bet():
 
 def spin(balance):
     lines = get_nbr_of_lines()
+    attempts = 0
     while True:
         bet = get_bet()
         total_bet = bet * lines
         if total_bet > balance:
             print(f"You have insufficient balace to bet that amount.\nYour current balace is: {balance} ")
+            attempts += 1
+            if attempts >= 3:            #if 3 or more attempts option for more deposit
+                more_deposit = input("Would you like to deposit more money (y/n) :")
+                if more_deposit.lower() == "y":
+                    balance += deposit()
+                    print(f"Your New balace is: ${balance}")
+                    attempts = 0
         else:
             break
     
